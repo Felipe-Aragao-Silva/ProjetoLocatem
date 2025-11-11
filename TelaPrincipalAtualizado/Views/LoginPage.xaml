@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TelaCadastroLocatem.Views.LoginPage"
+             Title="">
+    <Grid RowDefinitions="*,Auto" BackgroundColor="White">
+        <!-- Conteúdo principal -->
+        <Grid ColumnDefinitions="*,*" IsClippedToBounds="False" AutomationProperties.IsInAccessibleTree="False">
+
+            <!--Imagem de fundo-->
+            <Grid Grid.Column="1">
+                <Image Source="fundologin.jpg" Aspect="AspectFill"/>
+            </Grid>
+
+            <!--Saudação-->
+            <Grid Grid.Column="0" Padding="48" VerticalOptions="Center" HorizontalOptions="Center">
+                <Grid RowDefinitions="Auto,*">
+                    <VerticalStackLayout>
+                        <Label Text="Bem vindo(a)" Style="{StaticResource LabelSaudacao}"/>
+                        <Label Text="Faça login para continuar" Style="{StaticResource LabelNormal}" Margin="0,0,0,10"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="1" Spacing="16" Margin="0,24,0,0">
+
+                        <!--Campo de entrada de email-->
+                        <VerticalStackLayout>
+                            <Label Text="Email" Margin="0,0,0,5" Style="{StaticResource LabelNormal}"/>
+
+                            <Border Style="{StaticResource EstiloBordaEntry}">
+                                <Entry x:Name="Email" Placeholder="Digite seu email" Keyboard="Email" Style="{StaticResource EstiloEntry}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!--Campo de entrada de senha-->
+                        <VerticalStackLayout>
+                            <Label Text="Senha" Margin="0,5,0,5"  Style="{StaticResource LabelNormal}"/>
+
+                            <Border Style="{StaticResource EstiloBordaEntry}">
+                                <Grid ColumnDefinitions="*">
+                                    <Entry x:Name="Senha" 
+                                       Placeholder="Digite sua senha"
+                                       IsPassword="True" 
+                                       Style="{StaticResource EstiloEntry}"/>
+
+                                    <ImageButton x:Name="BotaoDeAlternarVisibilidade"
+                                        Grid.Column="1"
+                                        Source="olhofechado.png"  
+                                        Style="{StaticResource BotaoOlho}"
+                                        Clicked="AoClicarParaAlternarVisibilidadeDeSenha"/>
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <!--Seleção dos termos de uso-->
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="0" Margin="0,5,0,0">
+
+                            <Grid Grid.Column="0" WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" VerticalOptions="Start">
+                                <CheckBox Grid.Column="0" x:Name="TermosLGPDCheckBox" Style="{StaticResource CheckBox}"/>
+                            </Grid>
+
+                            <Label Grid.Column="1" LineBreakMode="WordWrap" VerticalOptions="Center" Margin="5,0,0,0" Style="{StaticResource LabelTermos}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Ao continuar, você concorda com os "/>
+
+                                        <Span Text="Termos de Uso" Style="{StaticResource EstiloLink}">
+
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="TermosDeUsoClicked" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+
+                                        <Span Text=" e a " />
+
+                                        <Span Text="Política de Privacidade" Style="{StaticResource EstiloLink}">
+
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="PoliticaDePrivacidadeClicked"/>
+                                            </Span.GestureRecognizers>
+                                        </Span>
+
+                                        <Span Text=", conforme a Lei Geral de Proteção de Dados (LGPD)."/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+
+                        <!--Botões de 'Entrar' e 'Cadastrar'-->
+                        <Button x:Name="Entrar" Text="Entrar" Clicked="OnLoginClicked" HorizontalOptions="Fill" VerticalOptions="Fill" Style="{StaticResource EstiloBotaoPrimario}"/>
+                        <Button x:Name="Cadastrar" Text="Cadastrar" Clicked="CadastroClicked" VerticalOptions="Fill" Style="{StaticResource EstiloBotaoSecundario}"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Rodapé -->
+        <Grid Row="1" Padding="0,8" BackgroundColor="{StaticResource CorPreto}">
+            <HorizontalStackLayout Spacing="24" Padding="0,0,24,0"   HorizontalOptions="End">
+                <Label Text="Termos e Política" VerticalOptions="Center" Style="{StaticResource LabelRodape}"/>
+                <Label Text="Acessibilidade" VerticalOptions="Center" Style="{StaticResource LabelRodape}"/>
+                <Label Text="Suporte" VerticalOptions="Center" Style="{StaticResource LabelRodape}"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

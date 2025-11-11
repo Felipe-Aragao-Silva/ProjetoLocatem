@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TelaCadastroLocatem.Views.LocatarioPage"
+             Title="Locatário"
+             Shell.NavBarIsVisible="False">
+    
+        <!-- Defini a tela em duas colunas-->
+    <Grid ColumnDefinitions="*,*">
+        <Grid Grid.Column="0" BackgroundColor="White">
+            <!-- Coluna esquerda-->
+            <Grid RowDefinitions="Auto">
+                <!-- Cabeçário -->
+                <VerticalStackLayout>
+                    <Grid>
+                        <!-- botao locatário na parte superior da tela -->
+                        <Button Text="Locatário" Style="{StaticResource BotaoTrocaAmarelo}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid>
+                <!-- Formulário - coluna da esquerda -->
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" 
+                          Padding="48"     
+                          HorizontalOptions="Fill" 
+                          VerticalOptions="Center">
+
+                    <VerticalStackLayout Grid.Row="0" Margin="-55,0,0,0">
+                        <HorizontalStackLayout>
+                            <!--Seta para voltar para a tela de login-->
+                            <ImageButton Source="seta.png" Clicked="VoltarParaLoginClicked" Style="{StaticResource BotaoSeta}"/>
+
+                            <Label Text="Locatário" Style="{StaticResource LabelTitulo}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Row="1" Spacing="16" Margin="0,10,0,0">
+                        <VerticalStackLayout>
+                            <!--Campo do Nome-->
+                            <Label Text="Nome" Style="{StaticResource LabelNormal}" Margin="0,0,0,5"/>
+
+                            <Border Style="{StaticResource EstiloBordaEntry}">
+                                <Entry x:Name="NomeEntry" Keyboard="Text" Placeholder="Digite seu nome" Style="{StaticResource EstiloEntry}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <!--Campo do Email-->
+                            <Label Text="Email" Style="{StaticResource LabelNormal}"  Margin="0,0,0,5"/>
+
+                            <Border Style="{StaticResource EstiloBordaEntry}">
+                                <Entry x:Name="EmailEntry" Keyboard="Email" Placeholder="Digite seu email" Style="{StaticResource EstiloEntry}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <!--Campo do CPF-->
+                            <Label Text="CPF" Style="{StaticResource LabelNormal}"  Margin="0,0,0,5"/>
+
+                            <Border Style="{StaticResource EstiloBordaEntry}">
+                                <Entry x:Name="CpfEntry" Keyboard="Numeric" Placeholder="Digite seu CPF" Style="{StaticResource EstiloEntry}"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <!--Campo de Endereço-->
+                            <Label Text="Endereço" Style="{StaticResource LabelNormal}" Margin="0,0,0,5"/>
+                            <Border Style="{StaticResource EstiloBordaEntry}">
+                                <Entry x:Name="EnderecoEntry" Keyboard="Text" Placeholder="Digite seu endereço" Style="{StaticResource EstiloEntry}" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <!--Campo da Senha-->
+                            <Label Text="Senha" Style="{StaticResource LabelNormal}" Margin="0,0,0,5"/>
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Border Style="{StaticResource EstiloBordaEntry}">
+                                    <Grid>
+                                        <Entry x:Name="SenhaEntry"  IsPassword="True" Placeholder="Digite sua senha" Style="{StaticResource EstiloEntry}"/>
+
+                                        <ImageButton x:Name="BotaoDeAlterarVisibilidade"  Source="olhofechado.png" Clicked="OnTogglePassword" Style="{StaticResource BotaoOlho}"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+
+
+                    <!--Link dos termos-->
+                    <Grid Grid.Row="3" Margin="0,5,0,0">
+                        <Label Grid.Column="1" 
+                                   LineBreakMode="WordWrap" 
+                                   VerticalOptions="Center" 
+                                   Margin="5,5,0,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Ao se cadastrar você concorda com os "/>
+
+                                    <Span Text="Termos de uso" Style="{StaticResource EstiloLink}">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="TermosDeUsoClicked"/>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+
+                                    <Span Text=" e as "/>
+                                    <Span Text="Políticas de Privacidade" Style="{StaticResource EstiloLink}">
+
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="PoliticaDePrivacidadeClicked"/>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <!--Botão de cadastrar -->
+                        <Button Text="Cadastrar" Clicked="OnLoginClicked" Style="{StaticResource EstiloBotaoPrimario}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            <!--Coluna direita -->
+            <Image Source="fundolocatario.png" Aspect="AspectFill"/>
+
+            <!--Botão para trocar para locador-->
+            <Button Text="Locador" Style="{StaticResource BotaoTrocaPreto}" Clicked="OnIrParaLocadorClicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>
