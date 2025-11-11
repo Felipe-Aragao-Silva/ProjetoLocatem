@@ -247,51 +247,58 @@
         </StackLayout>
 
         <!-- Conteúdo Direito -->
-        <Grid Grid.Column="1" Padding="30" RowDefinitions="Auto, *" RowSpacing="20">
+        <Grid Grid.Column="1" RowDefinitions="Auto, Auto, *" RowSpacing="20" BackgroundColor="{StaticResource CorBranco}">
+            <!--Grid tela-->
 
-            <Grid ColumnDefinitions="Auto, *, Auto" VerticalOptions="Start">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto, Auto, *, Auto" VerticalOptions="Start" BackgroundColor="{StaticResource CorPadrao}" HeightRequest="70">
+                <!--Grid para divisão da tela-->
 
                 <!-- Botão Menu -->
-                <Image Source="menu.png" Grid.Column="0"
-                            WidthRequest="25" HeightRequest="25"
-                               HorizontalOptions="Start" 
-                               VerticalOptions="Center">
+                <Image Source="menu2.png" Grid.Column="0" WidthRequest="45" HeightRequest="25" HorizontalOptions="Start" VerticalOptions="Center">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="AoTocarMenu" />
+                        <TapGestureRecognizer Tapped="AoTocarMenu"/>
                     </Image.GestureRecognizers>
                 </Image>
 
-                <Label Grid.Column="1" Text="Notificações" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource CorPadrao}" VerticalOptions="Center" Margin="10,0,0,0"/>
+                <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center" Margin="10,0,0,0">
 
-                <HorizontalStackLayout Spacing="15" Grid.Column="2">
-                    <!-- Botão Filtro -->
-                    <Frame BackgroundColor="{StaticResource CorPadrao}" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="120">
-                        <HorizontalStackLayout Spacing="12" VerticalOptions="Center" HorizontalOptions="Center">
-                            <Label Text="Filtro" TextColor="{StaticResource Detalhe}" VerticalOptions="Center"/>
-                            <Image Source="iconefiltro.png" HeightRequest="18" WidthRequest="18" Aspect="AspectFit"/>
-                        </HorizontalStackLayout>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnFilterClicked"/>
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                    <Image Source="sino.png" HeightRequest="25" WidthRequest="25"  VerticalOptions="Center"/>
 
-                    <!-- Botão Limpar Tudo -->
-                    <Frame BackgroundColor="{StaticResource CorPadrao}" CornerRadius="10" Padding="10" HasShadow="True" WidthRequest="132">
-                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Center">
-                            <Label Text="Limpar Tudo" TextColor= "{StaticResource Detalhe}" VerticalOptions="Center"/>
-                            <Image Source="iconelixeira.png" HeightRequest="17" WidthRequest="17" Aspect="AspectFit"/>
-                        </HorizontalStackLayout>
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnClearAllClicked"/>
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                    <Label Text="Notificações" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource CorPreto}" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <Image Source="chat.png" Grid.Column="3" HeightRequest="25" WidthRequest="55" HorizontalOptions="End" VerticalOptions="Center">
+                </Image>
+            </Grid>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Padding="30, 10">
+                <HorizontalStackLayout Grid.Column="0" Spacing="5" VerticalOptions="Center">
+
+                    <Label Text="Filtro: Hoje" TextColor="{StaticResource CorPreto}" FontSize="16" VerticalOptions="Center"/>
+
+                    <Image Source="setabaixo.png" HeightRequest="12" WidthRequest="12"  VerticalOptions="Center"/>
+
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFilterClicked"/>
+                    </HorizontalStackLayout.GestureRecognizers>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center" HorizontalOptions="End">
+
+                    <Image Source="lixeira.png" HeightRequest="16" WidthRequest="16" Aspect="AspectFit"/>
+
+                    <Label Text="Limpar tudo" TextColor="{StaticResource CorPreto}" FontSize="16" VerticalOptions="Center"/>
+
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnClearAllClicked"/>
+                    </HorizontalStackLayout.GestureRecognizers>
                 </HorizontalStackLayout>
             </Grid>
 
-            <!-- Lista de Notificações -->
-            <ScrollView Grid.Row="1">
+            <ScrollView Grid.Row="2" Padding="30, 0, 30, 30">
                 <VerticalStackLayout x:Name="NotificationsStack" Spacing="15"/>
             </ScrollView>
+
         </Grid>
     </Grid>
 </ContentPage>
