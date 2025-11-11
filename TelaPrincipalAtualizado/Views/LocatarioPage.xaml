@@ -31,7 +31,7 @@
                             <!--Seta para voltar para a tela de login-->
                             <ImageButton Source="seta.png" Clicked="VoltarParaLoginClicked" Style="{StaticResource BotaoSeta}"/>
 
-                            <Label Text="Locatário" Style="{StaticResource LabelTitulo}"/>
+                            <Label Text="Locatário" Style="{StaticResource TituloLabel}"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
 
