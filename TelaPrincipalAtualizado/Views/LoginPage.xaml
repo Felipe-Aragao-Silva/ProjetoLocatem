@@ -27,7 +27,7 @@
                             <Label Text="Email" Margin="0,0,0,5" Style="{StaticResource LabelNormal}"/>
 
                             <Border Style="{StaticResource EstiloBordaEntry}">
-                                <Entry x:Name="Email" Placeholder="Digite seu email" Keyboard="Email" Style="{StaticResource EstiloEntry}"/>
+                                <Entry x:Name="Email" Placeholder="Coloque o email desgraçado!!!" Keyboard="Email" Style="{StaticResource EstiloEntry}"/>
                             </Border>
                         </VerticalStackLayout>
 
