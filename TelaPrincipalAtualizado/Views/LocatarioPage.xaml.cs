@@ -85,7 +85,8 @@ public partial class LocatarioPage : ContentPage
             cpf.Equals(TEST_CPF))
         {
             // Se a validação for real, aqui você chamaria o serviço para cadastrar o usuário
-            await DisplayAlert("Sucesso", $"Usuário de Teste cadastrado com sucesso!", "OK");
+            await DisplayAlert("Sucesso", $"Locatário Teste cadastrado com sucesso! Entre com a sua conta para continuar", "OK");
+            await Shell.Current.GoToAsync("//LoginPage");
             return;
         }
         // =========================================================
@@ -96,6 +97,7 @@ public partial class LocatarioPage : ContentPage
         {
             // Aqui você usaria as variáveis 'nome' e 'endereco' para salvar os dados
             await DisplayAlert("Sucesso", "Cadastro realizado com sucesso!", "OK");
+            await Shell.Current.GoToAsync("//LoginPage");
             return;
         }
         else
@@ -135,9 +137,4 @@ public partial class LocatarioPage : ContentPage
         // Navega diretamente para a rota de login
         await Shell.Current.GoToAsync("//LoginPage");
     }
-
-    //private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    //{
-
-    //}
 }

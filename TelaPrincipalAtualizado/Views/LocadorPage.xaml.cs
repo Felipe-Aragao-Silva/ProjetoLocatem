@@ -74,7 +74,8 @@ public partial class LocadorPage : ContentPage
             cnpj.Equals(TEST_CNPJ))
         {
             // Se a validação for real, aqui você chamaria o serviço para cadastrar o usuário
-            await DisplayAlert("Sucesso", $"Usuário de Teste cadastrado com sucesso!", "OK");
+            await DisplayAlert("Sucesso", $"Locador Teste cadastrado com sucesso! Entre com a sua conta para continuar", "OK");
+            await Shell.Current.GoToAsync("//LoginPage");
             return;
         }
         // =========================================================
