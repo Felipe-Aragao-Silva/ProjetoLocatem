@@ -112,20 +112,25 @@ namespace TelaPrincipalAtualizado
             switch (nomeDoItem)
             {
                 case "Inicio":
-                    // Jutsu de Retorno: Se não estiver na raiz, desempilha.
-                    if (Navigation.NavigationStack.Count > 1)
-                    {
-                        await Navigation.PopAsync();
-                    }break;
+
+                    await Navigation.PopToRootAsync();
+
+                    break;
                 case "Carrinho":
 
+                    proximaPagina = new CarrinhoPage();
                     break;
                 case "Agendamento":
                     break;
                 case "Histórico":
+
+                    proximaPagina = new HistoricoPage();
+
                     break;
                 case "Notificações":
+
                     proximaPagina = new NotificacaoPage();
+
                     break;
                 case "Suporte":
                     break;

@@ -75,6 +75,9 @@ public partial class LocadorPage : ContentPage
         {
             // Se a validação for real, aqui você chamaria o serviço para cadastrar o usuário
             await DisplayAlert("Sucesso", $"Usuário de Teste cadastrado com sucesso!", "OK");
+
+            await Shell.Current.GoToAsync("//LoginPage"); 
+
             return;
         }
         // =========================================================
@@ -85,6 +88,9 @@ public partial class LocadorPage : ContentPage
         {
             // Aqui você usaria as variáveis 'nome' e 'endereco' para salvar os dados
             await DisplayAlert("Sucesso", "Cadastro realizado com sucesso!", "OK");
+
+            await Shell.Current.GoToAsync("//LoginPage");
+
             return;
         }
         else

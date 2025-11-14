@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TelaPrincipalAtualizado.ViewModels"
+             x:Class="TelaPrincipalAtualizado.Views.CarrinhoPage"
+             x:Name="RootPage"
+             Title="Carrinho de Locação">
+    
+    
+    <!-- Define o ViewModel como contexto de Binding -->
+    <ContentPage.BindingContext>
+        <vm:CarrinhoViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Spacing="16" Padding="10">
+
+        <!-- Cabeçalho -->
+        <Border BackgroundColor="{StaticResource CorPrimaria}" Padding="20">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="pg.png" WidthRequest="30" HeightRequest="30"/>
+                <Label Text="Carrinho de Locação"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+            </HorizontalStackLayout>
+        </Border>
+
+        <!-- Lista de Produtos -->
+        <CollectionView ItemsSource="{Binding Produtos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource Margem}">
+                        <VerticalStackLayout Spacing="10" Padding="10">
+
+                            <!-- Loja -->
+                            <Label Text="{Binding Loja}"
+                                   FontAttributes="Bold"
+                                   TextColor="Black"/>
+
+                            <HorizontalStackLayout Spacing="38" VerticalOptions="Center">
+
+                                <!-- Imagem -->
+                                <Image Source="{Binding Imagem}"
+                                       WidthRequest="80"
+                                       HeightRequest="90"/>
+
+                                <!-- Informações -->
+                                <VerticalStackLayout Spacing="1" WidthRequest="230">
+
+
+
+
+                                    <Label Text="{Binding Nome}"
+                                           FontAttributes="Bold"
+                                           FontSize="14"
+                                           TextColor="Black"
+                                           LineBreakMode="WordWrap"/>
+
+                                    <HorizontalStackLayout Spacing="8">
+
+                                        <!-- Picker Dias -->
+                                        <Border Style="{StaticResource PickerComBorda}">
+                                            <Picker Title="Dias"
+                                                    TitleColor="Black"
+                                                    TextColor="Black"
+                                                    ItemsSource="{Binding Source={x:Reference RootPage}, Path=BindingContext.DiasDisponiveis}"
+                                                    SelectedItem="{Binding DiasSelecionados, Mode=TwoWay}" />
+                                        </Border>
+
+                                        <!-- Picker Quantidade -->
+                                        <Border Style="{StaticResource PickerComBorda}">
+                                            <Picker Title="Qutd"
+                                                    TitleColor="Black"
+                                                    TextColor="Black"
+                                                    ItemsSource="{Binding Source={x:Reference RootPage}, Path=BindingContext.QuantidadesDisponiveis}"
+                                                    SelectedItem="{Binding Quantidade, Mode=TwoWay}" />
+                                        </Border>
+
+                                        <!-- Botão Remover -->
+                                        <Button Text="🗑"
+                                                FontSize="16"
+                                                BackgroundColor="Transparent"
+                                                TextColor="Red"
+                                                Command="{Binding Source={x:Reference RootPage}, Path=BindingContext.RemoverItemCommand}"
+                                                CommandParameter="{Binding}" />
+                                    </HorizontalStackLayout>
+
+                                    <!-- Preço -->
+                                    <Label Text="{Binding PrecoComDesconto, StringFormat='R$ {0:F2} / dia'}"
+                                           TextColor="Black" />
+
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Resumo Final -->
+        <VerticalStackLayout Padding="10" Spacing="5">
+            <Label Text="Resumo do Pedido"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="Black"/>
+
+            <Label Text="Frete: Grátis"
+                   TextColor="Green"/>
+
+            <Label Text="Total:"
+                   FontAttributes="Bold"
+                   FontSize="14"
+                   TextColor="Black"/>
+
+            <Label Text="{Binding Total, StringFormat='R$ {0:F2}'}"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="Black" />
+        </VerticalStackLayout>
+
+        <!-- Botão Confirmar -->
+        <Button Text="Confirmar Locação"
+                Command="{Binding Source={x:Reference RootPage}, Path=BindingContext.ConfirmarLocacaoCommand}" 
+                Style="{StaticResource EstiloBotaoConfirmar}" />
+
+    </VerticalStackLayout>
+</ContentPage>
