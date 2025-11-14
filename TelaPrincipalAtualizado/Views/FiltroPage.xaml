@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TelaPrincipalAtualizado.Views.FiltroPage"
+             BackgroundColor="White"
+             Title="Filtrar Itens">
+    
+    
+    <Grid HorizontalOptions="Center" VerticalOptions="Center">
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="25" Padding="0">
+
+            <Label Text="Filtrar por:" TextColor="{StaticResource CorPadrao}" FontAttributes="Bold" FontSize="25" HorizontalOptions="Center"/>
+            <Label Text="selecione o tipo:" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center"/>
+
+            <Picker x:Name="TipoPicker" WidthRequest="200" HeightRequest="50">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Todos</x:String>
+                        <x:String>Ferramenta</x:String>
+                        <x:String>Equipamento</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Label Text="Preço máximo:" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center"/>
+
+            <Slider x:Name="PrecoSlider" Minimum="0" Maximum="200" Value="200" WidthRequest="200" MinimumTrackColor="{StaticResource CorPadrao}" MaximumTrackColor="LightGray" ThumbColor="{StaticResource CorPadrao}"/>
+            <Label x:Name="PrecoLabel" Text="R$ 200,00" FontSize="14" TextColor="Black" HorizontalOptions="Center"/>
+
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Button Text="Aplicar" Clicked="AplicarFiltroButton_Clicked" 
+                        BackgroundColor="{StaticResource CorPadrao}" TextColor="Black" FontSize="14" WidthRequest="90" HeightRequest="35"/>
+                <Button Text="Cancelar" Clicked="CancelarButton_Clicked" 
+                        BackgroundColor="#B0B0B0" TextColor="Black" FontSize="14" WidthRequest="90" HeightRequest="35"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls.Shapes;
 using TelaPrincipalAtualizado.Models;
 using System;
+using TelaPrincipalAtualizado.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using TelaPrincipalAtualizado.Views;
@@ -23,6 +24,19 @@ public partial class NotificacaoPage : ContentPage
 		InitializeComponent();
         CarregarNotificacoes();
         MostrarNotificacoes(todasNotificacoes);
+
+        this.BindingContext = new SidebarViewModel();
+
+
+
+        // Assina a mensagem enviada pela SidebarViewModel
+        MessagingCenter.Subscribe<SidebarViewModel, string>(this, "NavegarPara", (sender, nomeDoItem) =>
+        {
+            // Chama o método LidarComSolicitacaoDeNavegacao para executar a lógica
+            LidarComSolicitacaoDeNavegacao(nomeDoItem);
+        });
+
+
     }
 
     private async void AoTocarMenu(object sender, EventArgs e)
@@ -49,41 +63,43 @@ public partial class NotificacaoPage : ContentPage
     {
         Page proximaPagina = null;
 
- 
         switch (nomeDoItem)
         {
             case "Inicio":
-                if (Navigation.NavigationStack.Count > 1)
-                {
-                    await Navigation.PopAsync();
-                }
+
+
+                await Navigation.PopToRootAsync();
+
                 break;
             case "Carrinho":
-                // proximaPagina = new CarrinhoPage();
-                await DisplayAlert("Navegação", "Navegando para: Carrinho", "OK");
+
+                proximaPagina = new CarrinhoPage();
+
                 break;
             case "Agendamento":
-                // proximaPagina = new AgendaPage();
-                await DisplayAlert("Navegação", "Navegando para: Agendamento", "OK");
+
                 break;
             case "Histórico":
-                // proximaPagina = new HistoricoPage();
-                await DisplayAlert("Navegação", "Navegando para: Histórico", "OK");
+
+                proximaPagina = new HistoricoPage();
                 break;
             case "Notificações":
-                // Já estamos aqui, não faz nada
+
+                proximaPagina = new NotificacaoPage();
+
                 break;
             case "Suporte":
-                // proximaPagina = new SuportePage();
-                await DisplayAlert("Navegação", "Navegando para: Suporte", "OK");
+
                 break;
         }
 
         // Executa o Push (Se for uma nova página)
         if (proximaPagina != null)
         {
+            // Certifique-se de que a navegação existe (não é a MainPage)
             await Navigation.PushAsync(proximaPagina);
         }
+
 
         // Fecha a SideBar
         if (isSidebarOpen)
