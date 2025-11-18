@@ -95,7 +95,7 @@ public partial class LoginPage : ContentPage
     // Botão/link de Termos De Uso no CheckBox
     private async void TermosDeUsoClicked(object sender, EventArgs e)
     {
-        using var stream = await FileSystem.OpenAppPackageFileAsync("TermosUso.txt");
+        using var stream = await FileSystem.OpenAppPackageFileAsync("termos.txt");
         using var reader = new StreamReader(stream);
 
         var termos = await reader.ReadToEndAsync();

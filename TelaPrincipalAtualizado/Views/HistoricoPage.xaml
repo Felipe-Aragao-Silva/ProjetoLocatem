@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TelaPrincipalAtualizado.ViewModels"
+             x:Class="TelaPrincipalAtualizado.Views.HistoricoPage"
+             Title="HistoricoPage">
+    <ContentPage.BindingContext>
+        <vm:HistoricoViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid x:Name="MainGrid" ColumnDefinitions="Auto,*">
+
+        <StackLayout x:Name="PainelLateral" BackgroundColor="#F5F5F5"
+                 Padding="20" Spacing="20" WidthRequest="300" VerticalOptions="FillAndExpand">
+
+            <!-- Logo -->
+            <HorizontalStackLayout Spacing="10" VerticalOptions="Center" Margin="30,0,0,0">
+                <Image Source="locatem.png" HeightRequest="60" WidthRequest="60" Aspect="AspectFit"/>
+                <Label Text="Locatem" FontSize="22" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <!-- Perfil -->
+            <Frame CornerRadius="40" HeightRequest="80" WidthRequest="80" Padding="0" HasShadow="False" BackgroundColor="#E0E0E0" HorizontalOptions="Center">
+                <Image Source="https://cdn-icons-png.flaticon.com/512/149/149071.png" Aspect="AspectFill"/>
+            </Frame>
+            <Label Text="Olá, Usuário" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
+
+            <!-- Navegação -->
+            <VerticalStackLayout Spacing="10" Margin="0,20,0,0">
+                <Button Text="Início" Style="{StaticResource BotaoLateral}" />
+                <Button Text="Carrinho" Style="{StaticResource BotaoLateral}" />
+                <Button Text="Agenda" Style="{StaticResource BotaoLateral}" />
+                <Button Text="Histórico" Style="{StaticResource BotaoLateralAtivo}" />
+                <Button Text="Notificações" Style="{StaticResource BotaoLateral}"/>
+                <Button Text="Suporte" Style="{StaticResource BotaoLateral}" />
+            </VerticalStackLayout>
+        </StackLayout>
+
+        <!-- Conteúdo principal -->
+        <Grid Grid.Column="1">
+
+            <!-- Botão Menu -->
+            <ImageButton x:Name="MenuButton" Source="iconemenu.png" WidthRequest="44" HeightRequest="44"
+                     BackgroundColor="Transparent" 
+                     HorizontalOptions="Start" VerticalOptions="Start" Margin="0,-8,0,70" ZIndex="10"/>
+
+            <!-- Botão Filtrar no canto superior direito -->
+            <Button Text="Filtrar"
+                BackgroundColor="{StaticResource CorPadrao}"
+                TextColor="Black"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                WidthRequest="120"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Margin="0,10,10,0"
+                Clicked="AbrirFiltro_Clicked"
+                ZIndex="10"/>
+
+            <!-- Conteúdo com Scroll Vertical -->
+            <ScrollView x:Name="ScrollView" Margin="0,60,0,0">
+                <VerticalStackLayout x:Name="MainStack" Padding="20" Spacing="30">
+
+                    <!-- Histórico de Compra -->
+                    <Label Text="— Histórico de Compra —" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource CorPadrao}"/>
+
+                    <!-- Scroll horizontal para cards do histórico -->
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                        <HorizontalStackLayout x:Name="HistoricoCompraLayout" Spacing="10" Padding="0,0,0,5">
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
+
+                    <!-- Ofertas Visualizadas -->
+                    <Label Text="— Ofertas Visualizadas —" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource CorPadrao}"/>
+
+                    <!-- Scroll horizontal para cards de ofertas -->
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Always">
+                        <HorizontalStackLayout x:Name="OfertasLayout" Spacing="10" Padding="0,0,0,5">
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+    </Grid>
+</ContentPage>

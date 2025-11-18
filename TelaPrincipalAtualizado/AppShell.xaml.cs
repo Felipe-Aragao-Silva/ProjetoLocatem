@@ -1,6 +1,8 @@
 ﻿using Microsoft.Maui.Controls;
 using TelaCadastroLocatem.Views;
 using TelaPrincipalAtualizado;
+using TelaPrincipalAtualizado.Views;
+
 namespace TelaCadastroLocatem
 {
     public partial class AppShell : Shell
@@ -19,7 +21,21 @@ namespace TelaCadastroLocatem
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));
 
             Routing.RegisterRoute("LocadorPage", typeof(LocadorPage));
-            Routing.RegisterRoute("MainPage", typeof(MainPage));
+
+            //Registro do carrinho de locação
+            Routing.RegisterRoute("CarrinhoPage", typeof(CarrinhoPage));
+
+            //Registro tela de Inicio
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+
+
+
+            //Registro da tel notificações
+            Routing.RegisterRoute("NotificacaoPage", typeof(NotificacaoPage));
+
+
+            //Registro tela de histórico
+            Routing.RegisterRoute("HistoricoPage", typeof(HistoricoPage));
 
             //Routing.RegisterRoute("LocatarioPage", typeof(LocatarioPage));
 
