@@ -179,4 +179,24 @@
         <Setter Property="HorizontalOptions" Value="Start"/>
     </Style>
 
+    <!-- Estilo padrão dos botões do painel lateral -->
+    <Style x:Key="BotaoLateral" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BorderColor" Value="{StaticResource PainelLateralEscuro}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="240" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <!-- Estilo do botão ativo (página atual: Notificações) -->
+    <Style x:Key="BotaoLateralAtivo" TargetType="Button" BasedOn="{StaticResource BotaoLateral}">
+        <Setter Property="BackgroundColor" Value="{StaticResource PainelLateralEscuro}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BorderWidth" Value="0" />
+    </Style>
+
 </ResourceDictionary>

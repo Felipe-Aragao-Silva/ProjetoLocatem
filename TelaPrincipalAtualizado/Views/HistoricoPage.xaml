@@ -37,7 +37,7 @@
         </StackLayout>
 
         <!-- Conteúdo principal -->
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" BackgroundColor="#F5F5F5">
 
             <!-- Botão Menu -->
             <ImageButton x:Name="MenuButton" Source="iconemenu.png" WidthRequest="44" HeightRequest="44"
