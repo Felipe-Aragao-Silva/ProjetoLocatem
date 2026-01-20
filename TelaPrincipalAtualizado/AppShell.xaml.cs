@@ -7,7 +7,6 @@ namespace TelaCadastroLocatem
 {
     public partial class AppShell : Shell
     {
-        private static bool _routeaRegistered; // Campo estático para rastrear se a rota já foi registrada.
         public AppShell()
         {
             InitializeComponent();
@@ -36,6 +35,9 @@ namespace TelaCadastroLocatem
 
             //Registro tela de histórico
             Routing.RegisterRoute("HistoricoPage", typeof(HistoricoPage));
+
+            //Registro tela de Chat
+            Routing.RegisterRoute("ChatPage", typeof(ChatPage));
 
             //Routing.RegisterRoute("LocatarioPage", typeof(LocatarioPage));
 

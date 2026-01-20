@@ -151,5 +151,11 @@ namespace TelaPrincipalAtualizado
             }
 
         }
+
+        // Navegação para o Chat
+        private async void AoTocarChat(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ChatPage());
+        }
     }
 }

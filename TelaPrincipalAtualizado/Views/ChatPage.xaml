@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TelaPrincipalAtualizado.ViewModels"
+             xmlns:converters="clr-namespace:TelaPrincipalAtualizado.Converters"
+             x:Class="TelaPrincipalAtualizado.Views.ChatPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ChatViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,280">
+        
+        <!-- ==================== HEADER ==================== -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" 
+              BackgroundColor="{StaticResource CorPrimaria}" 
+              Padding="15,10"
+              HeightRequest="56">
+            
+            <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                <!-- Menu Hamburger -->
+                <Image Source="menu.png" 
+                       WidthRequest="24" 
+                       HeightRequest="24"
+                       VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMenuTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                
+                <!-- Ícone Chat -->
+                <Image Source="chat.png" 
+                       WidthRequest="24" 
+                       HeightRequest="24"
+                       VerticalOptions="Center"/>
+                
+                <!-- Título -->
+                <Label Text="Chat" 
+                       FontSize="18" 
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource CorPreto}"
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!-- ==================== ÁREA DO CHAT (Coluna Esquerda) ==================== -->
+        <Grid Grid.Row="1" Grid.Column="0" 
+              BackgroundColor="{StaticResource CorBranco}"
+              RowDefinitions="Auto,*,Auto"
+              Padding="0">
+
+            <!-- Header do Contato Selecionado -->
+            <Grid Grid.Row="0" 
+                  Padding="16,12"
+                  BackgroundColor="{StaticResource CorBranco}"
+                  ColumnDefinitions="Auto,*,Auto">
+                
+                <!-- Avatar com indicador de status -->
+                <Grid Grid.Column="0" WidthRequest="48" HeightRequest="48">
+                    <Frame WidthRequest="48" 
+                           HeightRequest="48"
+                           CornerRadius="24"
+                           Padding="0"
+                           IsClippedToBounds="True"
+                           BorderColor="Transparent"
+                           HasShadow="False">
+                        <Image Source="{Binding SelectedContactAvatar}" 
+                               Aspect="AspectFill"/>
+                    </Frame>
+                    
+                    <!-- Indicador de status no avatar -->
+                    <Ellipse WidthRequest="14" 
+                             HeightRequest="14"
+                             Fill="{Binding IsContactOnline, Converter={StaticResource BoolToColorConverter}}"
+                             Stroke="White"
+                             StrokeThickness="2"
+                             HorizontalOptions="End"
+                             VerticalOptions="End"
+                             Margin="0,0,2,2"/>
+                </Grid>
+                
+                <!-- Nome -->
+                <VerticalStackLayout Grid.Column="1" 
+                                     VerticalOptions="Center"
+                                     Margin="12,0,0,0">
+                    <Label Text="{Binding SelectedContactName}" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource CorPreto}"/>
+                    <Label Text="{Binding SelectedContactRole}"
+                           FontSize="12"
+                           TextColor="Gray"/>
+                </VerticalStackLayout>
+                
+                <!-- Status Online com bolinha -->
+                <HorizontalStackLayout Grid.Column="2" 
+                                       VerticalOptions="Center"
+                                       Spacing="6">
+                    <Label Text="{Binding OnlineStatusText}" 
+                           FontSize="13"
+                           TextColor="Gray"
+                           VerticalOptions="Center"/>
+                    <Ellipse WidthRequest="10" 
+                             HeightRequest="10"
+                             Fill="{Binding IsContactOnline, Converter={StaticResource BoolToColorConverter}}"
+                             VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!-- Linha Separadora -->
+            <BoxView Grid.Row="0" 
+                     HeightRequest="1" 
+                     Color="#E0E0E0" 
+                     VerticalOptions="End"/>
+
+            <!-- Lista de Mensagens -->
+            <CollectionView Grid.Row="1" 
+                            ItemsSource="{Binding Messages}"
+                            Margin="16,8"
+                            x:Name="MessagesCollection">
+                
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Border BackgroundColor="#E5E5E5"
+                                    StrokeThickness="0"
+                                    Padding="12,8"
+                                    MaximumWidthRequest="320"
+                                    HorizontalOptions="{Binding HorizontalAlignment}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12"/>
+                                </Border.StrokeShape>
+                                
+                                <Grid RowDefinitions="Auto,Auto" RowSpacing="4">
+                                    <Label Grid.Row="0"
+                                           Text="{Binding Content}" 
+                                           FontSize="14"
+                                           TextColor="{StaticResource CorPreto}"
+                                           LineBreakMode="WordWrap"/>
+                                    
+                                    <Label Grid.Row="1"
+                                           Text="{Binding FormattedTime}" 
+                                           FontSize="10"
+                                           TextColor="Gray"
+                                           HorizontalOptions="End"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- ==================== INPUT DE MENSAGEM UNIFICADO ==================== -->
+            <Border Grid.Row="2" 
+                    Margin="20,10,20,20"
+                    BackgroundColor="#F5F5F5"
+                    Stroke="#DDDDDD"
+                    StrokeThickness="1"
+                    HeightRequest="50"
+                    Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="25"/>
+                </Border.StrokeShape>
+                
+                <!-- Grid interno: Entry + Botão -->
+                <Grid ColumnDefinitions="*,Auto" 
+                      Padding="16,0,8,0">
+                    
+                    <!-- Entry - Sem NENHUM efeito visual nativo -->
+                    <Entry Grid.Column="0"
+                           Placeholder="Escreva sua mensagem"
+                           PlaceholderColor="#AAAAAA"
+                           Text="{Binding MessageText, Mode=TwoWay}"
+                           FontSize="14"
+                           TextColor="#333333"
+                           BackgroundColor="Transparent"
+                           Margin="0"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           ReturnCommand="{Binding SendMessageCommand}"
+                           ClearButtonVisibility="Never"
+                           IsSpellCheckEnabled="False"
+                           IsTextPredictionEnabled="True"/>
+                    
+                    <!-- Botão Enviar - Integrado ao container -->
+                    <ImageButton Grid.Column="1"
+                                 Source="setadireita.png"
+                                 WidthRequest="26"
+                                 HeightRequest="26"
+                                 Padding="0"
+                                 Margin="8,0,4,0"
+                                 BackgroundColor="Transparent"
+                                 BorderWidth="0"
+                                 Command="{Binding SendMessageCommand}"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Opacity="0.6"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ==================== SIDEBAR DE CONTATOS (Coluna Direita) ==================== -->
+        <Grid Grid.Row="1" Grid.Column="1" 
+              BackgroundColor="#F5F5F5">
+            
+            <CollectionView ItemsSource="{Binding Contacts}"
+                            SelectionMode="None">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="{Binding BackgroundColor}"
+                                StrokeThickness="0"
+                                Padding="12,10"
+                                Margin="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="0"/>
+                            </Border.StrokeShape>
+                            
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ChatViewModel}}, Path=SelectContactCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                            
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                
+                                <!-- Avatar do Contato com indicador de status -->
+                                <Grid Grid.Column="0" WidthRequest="40" HeightRequest="40">
+                                    <Frame WidthRequest="40" 
+                                           HeightRequest="40"
+                                           CornerRadius="20"
+                                           Padding="0"
+                                           IsClippedToBounds="True"
+                                           BorderColor="Transparent"
+                                           HasShadow="False">
+                                        <Image Source="{Binding DisplayAvatar}" Aspect="AspectFill"/>
+                                    </Frame>
+                                    
+                                    <!-- Indicador Online no avatar -->
+                                    <Ellipse WidthRequest="12" 
+                                             HeightRequest="12"
+                                             Fill="{Binding StatusColor}"
+                                             Stroke="White"
+                                             StrokeThickness="2"
+                                             HorizontalOptions="End"
+                                             VerticalOptions="End"
+                                             Margin="0,0,0,0"/>
+                                </Grid>
+                                
+                                <!-- Nome e Role -->
+                                <VerticalStackLayout Grid.Column="1" 
+                                                     VerticalOptions="Center"
+                                                     Spacing="2">
+                                    <Label Text="{Binding Name}" 
+                                           FontSize="14"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource CorPreto}"
+                                           LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding RoleDescription}"
+                                           FontSize="11"
+                                           TextColor="Gray"/>
+                                </VerticalStackLayout>
+                                
+                                <!-- Horário -->
+                                <Label Grid.Column="2"
+                                       Text="{Binding FormattedLastMessageTime}" 
+                                       FontSize="11"
+                                       TextColor="Gray"
+                                       VerticalOptions="Start"
+                                       Margin="0,2,0,0"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- Linha Separadora Vertical entre Chat e Sidebar -->
+        <BoxView Grid.Row="1" 
+                 Grid.Column="0"
+                 WidthRequest="1" 
+                 Color="#E0E0E0" 
+                 HorizontalOptions="End"/>
+    </Grid>
+</ContentPage>
