@@ -332,11 +332,7 @@
                     WidthRequest="30" HeightRequest="30" 
                     VerticalOptions="Center"
                     HorizontalOptions="End"
-                    Margin="0,0,15,0">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="AoTocarChat"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+                    Margin="0,0,15,0"/>
                     
                     
                 </Grid>
