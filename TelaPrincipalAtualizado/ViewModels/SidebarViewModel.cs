@@ -48,7 +48,7 @@ namespace TelaPrincipalAtualizado.ViewModels
         //NotifyPropertyChanged
 
         //Evento de notificação que o xaml ouve
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         //Método que dispara o evento
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
